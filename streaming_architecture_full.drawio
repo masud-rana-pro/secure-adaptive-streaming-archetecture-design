@@ -1,0 +1,153 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram id="streaming-arch" name="Secure Adaptive Streaming - Full Architecture">
+    <mxGraphModel dx="2491" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1650" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontStyle=1;fontSize=18;fontColor=#1F4E79;align=left;verticalAlign=middle;" value="Secure Adaptive Video/Audio Streaming — End-to-End Architecture" vertex="1">
+          <mxGeometry height="30" width="585" x="520" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#1E40AF;fontColor=#FFFFFF;fontStyle=1;fontSize=11;arcSize=12;" value="Upload Service (issues pre-signed URL)" vertex="1">
+          <mxGeometry height="80" width="170" x="470" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#0369A1;fontColor=#FFFFFF;fontStyle=1;fontSize=12;boundedLbl=1;" value="Raw Object Storage (S3 / GCS/Blob Storage)" vertex="1">
+          <mxGeometry height="80" width="170" x="710" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#155E75;fontColor=#FFFFFF;fontStyle=1;fontSize=12;arcSize=12;" value="Encoding Queue (Kafka / SQS)" vertex="1">
+          <mxGeometry height="80" width="170" x="950" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#115E59;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;arcSize=12;" value="Encoder Worker Fleet (FFmpeg — ABR ladder 240p–1080p, H.264/VP9)" vertex="1">
+          <mxGeometry height="80" width="190" x="1190" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#0369A1;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;boundedLbl=1;" value="Encoded Storage (ABR renditions, CENC/cbcs encrypted)" vertex="1">
+          <mxGeometry height="80" width="190" x="1190" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#7C2D12;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;arcSize=12;" value="Watermark Injector (server-side A/B, video + audio track)" vertex="1">
+          <mxGeometry height="80" width="170" x="950" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#065F46;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;" value="CDN Edge Cache (HLS .m3u8 / DASH .mpd)" vertex="1">
+          <mxGeometry height="90" width="180" x="700" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#312E81;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;arcSize=12;" value="Client Player (ABR selection + secure playback layer)" vertex="1">
+          <mxGeometry height="80" width="170" x="470" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="n14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#7F1D1D;fontColor=#FFFFFF;fontStyle=1;fontSize=9.8;arcSize=12;" value="Output Protection (HDCP on HDMI/DP + OS secure audio path)" vertex="1">
+          <mxGeometry height="75" width="170" x="470" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="n13" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#334155;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;boundedLbl=1;" value="Metadata DB (sharded / NoSQL)" vertex="1">
+          <mxGeometry height="75" width="170" x="230" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="n10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#5B21B6;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;arcSize=12;" value="DRM License Server (Widevine/FairPlay/PlayReady)" vertex="1">
+          <mxGeometry height="75" width="170" x="470" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="n11" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#5B21B6;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;boundedLbl=1;" value="Key Store (content encryption keys)" vertex="1">
+          <mxGeometry height="75" width="170" x="710" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="n12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE64FC;strokeColor=#713F12;fontColor=#FFFFFF;fontStyle=1;fontSize=10.5;arcSize=12;" value="Leak Monitoring &amp; Watermark Extraction" vertex="1">
+          <mxGeometry height="75" width="170" x="950" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#94A3B8;fontColor=#1E1B4B;fontSize=11;align=left;verticalAlign=top;spacing=10;size=20;" value="Scalability &amp;amp; Reliability Layer (cross-cutting)&amp;nbsp;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Microservices: Upload / Encoding / Metadata / Streaming API, each scaled independently&lt;/div&gt;&lt;div&gt;Load balancers in front of every service cluster; stateless services for easy horizontal scaling&amp;nbsp;&lt;/div&gt;&lt;div&gt;Multi-region deployment + DNS/global traffic routing to the nearest region&amp;nbsp;&lt;/div&gt;&lt;div&gt;Redis/Memcached caches hot metadata; CDN caches the heavy video content&amp;nbsp;&lt;/div&gt;&lt;div&gt;Autoscaling on CPU/queue depth; monitoring, logging, alerting, and rate limiting throughout&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="520" x="200" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="n2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="95" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="n3" value="2. PUT video directly (multipart/resumable)">
+          <mxGeometry relative="1" x="-1" y="99" as="geometry">
+            <mxPoint x="-85" y="49" as="offset" />
+            <mxPoint x="380" y="155" as="sourcePoint" />
+            <mxPoint x="710" y="154.99999999999997" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="n4" value="3. upload-complete event → enqueue encode job">
+          <mxGeometry relative="1" x="-1" y="104" as="geometry">
+            <mxPoint x="-85" y="44" as="offset" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;" target="n5" value="4. job picked up">
+          <mxGeometry relative="1" x="-1" y="112" as="geometry">
+            <mxPoint x="-100" y="62" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;" target="n6" value="5. ABR ladder + encrypt">
+          <mxGeometry relative="1" x="-1" y="-91" as="geometry">
+            <mxPoint x="76" y="-90" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;" target="n7" value="6. segments → watermark">
+          <mxGeometry relative="1" x="-1" y="117" as="geometry">
+            <mxPoint x="100" y="-57" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;" target="n8" value="7. watermarked segment cached at edge">
+          <mxGeometry relative="1" x="-1" y="-94" as="geometry">
+            <mxPoint x="80" y="44" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;" target="n9" value="8. GET manifest + adaptive segments">
+          <mxGeometry relative="1" x="-1" y="-100" as="geometry">
+            <mxPoint x="80" y="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#334155;fontColor=#334155;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;" target="n11" value="validate / fetch key">
+          <mxGeometry relative="1" x="0.4286" y="48" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="n12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#757575;fontColor=#CA8A04;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;fillColor=#757575;" target="n7" value="">
+          <mxGeometry relative="1" y="-85" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#64748B;fontColor=#64748B;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;exitX=0.006;exitY=0.624;exitDx=0;exitDy=0;exitPerimeter=0;" value="write video metadata">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="460" y="105.03" as="sourcePoint" />
+            <mxPoint x="315.0588235294117" y="545" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#64748B;fontColor=#64748B;fontSize=10;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;" target="n13" value="Watch-API metadata read">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-1" parent="1" style="html=1;whiteSpace=wrap;labelPosition=center;verticalLabelPosition=middle;verticalAlign=top;align=center;fontSize=12;outlineConnect=0;spacingTop=-6;sketch=0;shape=mxgraph.sitemap.upload;fillColor=#CE64FC;strokeColor=#6c8ebf;" value="&lt;span style=&quot;color: rgb(255, 255, 255); font-weight: 700;&quot;&gt;Client App (Upload)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="70" width="120" x="260" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;color: rgb(51, 65, 85); font-size: 10px; white-space: nowrap; background-color: rgb(255, 255, 255);&quot;&gt;1. request upload URL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="110" x="260" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-7" edge="1" parent="1" source="n14" style="html=1;labelBackgroundColor=#ffffff;startArrow=classic;startFill=1;startSize=6;endArrow=classic;endFill=1;endSize=6;jettySize=auto;orthogonalLoop=1;strokeWidth=1;fontSize=14;rounded=0;entryX=0.465;entryY=0.988;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.465;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="n9" value="">
+          <mxGeometry height="60" relative="1" width="60" as="geometry">
+            <mxPoint x="640" y="435" as="sourcePoint" />
+            <mxPoint x="700" y="375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 10px; white-space: nowrap; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;protects HDMI/DP output + audio buffer&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="610" y="363" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 10px; white-space: nowrap; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;license + session ID&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="570" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-12" edge="1" parent="1" source="n10" style="html=1;labelBackgroundColor=#ffffff;startArrow=classic;startFill=1;startSize=6;endArrow=classic;endFill=1;endSize=6;jettySize=auto;orthogonalLoop=1;strokeWidth=1;fontSize=14;rounded=0;entryX=0.465;entryY=0.988;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.465;exitY=0.013;exitDx=0;exitDy=0;exitPerimeter=0;" value="">
+          <mxGeometry height="60" relative="1" width="60" as="geometry">
+            <mxPoint x="550" y="521" as="sourcePoint" />
+            <mxPoint x="550" y="475" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 10px; white-space: nowrap; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);&quot;&gt;reads watermark spec&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="1005" y="415" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-15" edge="1" parent="1" source="title" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;innerLoopWaypoints=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.539;entryY=1.057;entryDx=0;entryDy=0;entryPerimeter=0;" target="title">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-16" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#94A3B8;fontColor=#1E1B4B;fontSize=11;align=center;verticalAlign=top;spacing=10;size=20;" value="&lt;div style=&quot;&quot;&gt;Author&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Md. Masud Rana&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Mobile: 01575634380&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Email: masudrana.mwp@gmail.com&lt;/div&gt;&lt;div style=&quot;&quot;&gt;Portfolio: masud-rana-pro.github.io/portfolio&lt;/div&gt;&lt;div style=&quot;&quot;&gt;GitHub: github.com/masud-rana-pro&lt;/div&gt;&lt;div style=&quot;&quot;&gt;LinkedIn: linkedin.com/in/masudmwp&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="520" x="910" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="BsBASZiAColgUcN6ZNKc-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="9. request license" vertex="1">
+          <mxGeometry height="30" width="110" x="500" y="235" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
